@@ -1,14 +1,36 @@
-import { create } from "zustand";
+import { SetState, create } from "zustand";
 import { devtools } from "zustand/middleware";
+import { requests } from "../helpers/requests";
 
-interface StateAction {}
+interface StateAction {
+  getList: () => Promise<any>;
 
-const initialState: StateAction = {};
+  list: [];
+  listLoading: boolean;
+}
 
-const appStore = create(
-  devtools(() => ({
+const initialState: StateAction = {
+  getList: async () => {},
+  list: [],
+  listLoading: false,
+};
+
+const categoryStore = create(
+  devtools((set: SetState<StateAction>) => ({
     ...initialState,
+    getList: async () => {
+      set({ listLoading: true });
+      try {
+        const { data } = await requests.fetchOperator();
+        set({ list: data.data });
+        return data;
+      } catch (err) {
+        return err;
+      } finally {
+        set({ listLoading: false });
+      }
+    },
   }))
 );
 
-export default appStore;
+export default categoryStore;

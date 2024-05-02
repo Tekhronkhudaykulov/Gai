@@ -4,6 +4,7 @@
     "useDefineForClassFields": true,
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
+    "typeRoots": ["node_modules/@types", "path/to/your/custom/types"],
     "skipLibCheck": true,
 
     /* Bundler mode */
@@ -20,9 +21,7 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "exclude": [
-    "/electron"
-  ],
+  "exclude": ["/electron"],
   "include": ["src", "electron"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

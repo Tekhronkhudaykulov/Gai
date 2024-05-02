@@ -8,6 +8,7 @@ export const $api = axios.create({
 });
 
 $api.defaults.headers.common["Accept"] = "application/json";
+$api.defaults.headers.common["ngrok-skip-browser-warning"] = "69420";
 
 export const initApp = () => {
   $api.defaults.headers.common.Authorization = `Bearer ${token}`;

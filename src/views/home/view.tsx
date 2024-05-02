@@ -9,7 +9,9 @@ const Home = () => {
   const { list, getList } = appStore();
 
   useEffect(() => {
-    getList();
+    setTimeout(() => {
+      getList();
+    }, 10000);
   }, []);
 
   return (

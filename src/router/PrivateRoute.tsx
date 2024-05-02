@@ -1,5 +1,4 @@
 import { FC, ReactNode } from "react";
-import { Footer, Navbar } from "../layouts";
 
 interface Props {
   child?: ReactNode;
@@ -8,9 +7,7 @@ interface Props {
 const PrivateRoute: FC<Props> = ({ child }) => {
   return (
     <>
-      <Navbar />
       <div className="h-full">{child}</div>
-      <Footer />
     </>
   );
 };

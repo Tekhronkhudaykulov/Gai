@@ -4,7 +4,6 @@ import { requests } from "../helpers/requests";
 
 interface StateAction {
   getList: () => Promise<any>;
-
   list: [];
   listLoading: boolean;
 }
@@ -22,7 +21,7 @@ const categoryStore = create(
       set({ listLoading: true });
       try {
         const { data } = await requests.fetchOperator();
-        set({ list: data.data });
+        set({ list: data?.data });
         return data;
       } catch (err) {
         return err;

@@ -44,12 +44,12 @@ const Home = () => {
   }, []);
 
   const List = [
-    { operatorId: 1, queue: "F9" },
-    { operatorId: 2, queue: "F10" },
-    { operatorId: 3, queue: "F11" },
-    { operatorId: 4, queue: "F12" },
-    { operatorId: 5, queue: "F13" },
-    { operatorId: 6, queue: "F14" },
+    { operatorId: 1, queue: "F9", bg: "red" },
+    { operatorId: 2, queue: "F10", bg: "green" },
+    { operatorId: 3, queue: "F11", bg: "yellow" },
+    { operatorId: 4, queue: "F12", bg: "red" },
+    { operatorId: 5, queue: "F13", bg: "green" },
+    { operatorId: 6, queue: "F14", bg: "yellow" },
   ];
 
   return (
@@ -72,7 +72,7 @@ const Home = () => {
             </p>
           </div>
         </div>
-        <div className="p-[20px] logo-container  flex items-center justify-center text-white bg-[black] ">
+        <div className="p-[20px] logo-container  flex items-center justify-center text-white  ">
           <img
             className="w-[100%] max-h-[400px]  object-contain"
             src={Logo}
@@ -81,11 +81,12 @@ const Home = () => {
         </div>
       </div>
       <div
-        className={`w-[40%]  grid grid-cols-2 gap-[10px]  bg-[#F6F6F7] p-[20px]`}
+        className={`w-[40%]  grid grid-cols-2 gap-[10px]   bg-[#F6F6F7] p-[20px]`}
       >
         {List.map((item: any) => (
           <div
-            className={`grid  grid-cols-2  rounded-[8px] shadow-inner bg-[green] p-[15px]`}
+            className={`grid  grid-cols-2  rounded-[8px] shadow-inner  p-[15px]`}
+            style={{ background: item.bg }}
           >
             <div className="flex items-center bg-[white] rounded-[8px] justify-center ">
               <p className="text-[24px]   font-bold">{item.queue}</p>

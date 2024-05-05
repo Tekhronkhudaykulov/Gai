@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
 import Logo from "../../assets/images/img_gai.png";
-import { appStore } from "../../store";
 import "./home.scss";
+import QueueCard from "../../components/queueCard";
+import { appStore } from "../../store";
+import { useEffect } from "react";
 
 const Home = () => {
   const { list, getList } = appStore();
-  const [date, setDate] = useState(new Date());
 
   useEffect(() => {
     getList();
@@ -18,88 +18,84 @@ const Home = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const timeLocal = new Date(
-    date.toLocaleString("en-US", { timeZone: "Asia/Tashkent" })
-  );
-  const monthNames = [
-    "Yanvar",
-    "Fevral",
-    "Mart",
-    "Aprel",
-    "May",
-    "Iyun",
-    "Iyul",
-    "Avgust",
-    "Sentabr",
-    "Oktabr",
-    "Noyabr",
-    "Dekabr",
-  ];
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setDate(new Date());
-    }, 1000);
-    return () => clearInterval(timer);
-  }, []);
-
-  const List = [
-    { operatorId: 1, queue: "F9", bg: "red" },
-    { operatorId: 2, queue: "F10", bg: "green" },
-    { operatorId: 3, queue: "F11", bg: "yellow" },
-    { operatorId: 4, queue: "F12", bg: "red" },
-    { operatorId: 5, queue: "F13", bg: "green" },
-    { operatorId: 6, queue: "F14", bg: "yellow" },
-  ];
-
   return (
-    <div className="flex bg-[black]">
-      <div className="w-[60%] !shadow-2xl">
-        <div className="flex justify-between px-[15px]   bg-[#F6F6F7] items-center">
-          <img
-            className="w-[150px] h-[80px] object-contain"
-            src={Logo}
-            alt=""
-          />
-          <div>
-            <p className="text-[40px] font-bold text-end">
-              {timeLocal.getHours()}:
-              {timeLocal.getMinutes().toString().padStart(2, "0")}
-            </p>
-            <p className="text-[25px] font-bold">
-              {date.getDate()} {monthNames[timeLocal.getMonth()]}
-              {date.getFullYear()}
-            </p>
-          </div>
+    <div>
+      <div className="flex  items-center bg-[#004138] py-[3px]">
+        <div className="w-[300px] flex items-center justify-center">
+          <img src={Logo} className="w-[200px] h-[200px]" alt="" />
         </div>
-        <div className="p-[20px] logo-container  flex items-center justify-center text-white  ">
-          <img
-            className="w-[100%] max-h-[400px]  object-contain"
-            src={Logo}
-            alt=""
-          />
-        </div>
+        <p className="text-center text-[65px] mr-[100px] text-white">
+          Электронная очередь / Elektron navbat
+        </p>
       </div>
-      <div
-        className={`w-[40%]  grid grid-cols-2 gap-[10px]   bg-[#F6F6F7] p-[20px]`}
-      >
-        {List.map((item: any) => (
-          <div
-            className={`grid  grid-cols-2  rounded-[8px] shadow-inner  p-[15px]`}
-            style={{ background: item.bg }}
-          >
-            <div className="flex items-center bg-[white] rounded-[8px] justify-center ">
-              <p className="text-[24px]   font-bold">{item.queue}</p>
-            </div>
-            <div className="flex items-center justify-center flex-col">
-              <p className="text-[18px]  text-white !m-0">Operator</p>
-              <p className="text-[24px] text-white !m-0">{item.operatorId}</p>
+      <div className="grid grid-cols-2 gap-x-[5px] h-[91vh]">
+        <div className="bg-[#ffffff]">
+          <div className="bg-[#DB0000] flex items-center justify-center py-[20px]  text-white">
+            <p className="uppercase text-[50px]">ожидание / kutish </p>
+          </div>
+          <div className="imgBanner h-[70vh] bg-contain bg-center">
+            <div className="mt-[20px] card-container pl-[15px] ">
+              {/* <QueueCard
+                title="A"
+                section="MIB"
+                num={100}
+                bg="#DB0000"
+                textBg="#DB0000"
+              />
+              <QueueCard
+                title="B"
+                section="MAb"
+                num={101}
+                bg="#DB0000"
+                textBg="#DB0000"
+              />
+              <QueueCard
+                title="C"
+                section="Kassa"
+                num={2}
+                bg="#DB0000"
+                textBg="#DB0000"
+              />
+              <QueueCard
+                title="A"
+                section="MIB"
+                num={100}
+                bg="#DB0000"
+                textBg="#DB0000"
+              />
+              <QueueCard
+                title="B"
+                section="MAb"
+                num={101}
+                bg="#DB0000"
+                textBg="#DB0000"
+              /> */}
             </div>
           </div>
-        ))}
+        </div>
+
+        <div className="bg-[#ffffff]">
+          <div className="bg-[#2EA006] flex items-center justify-center py-[20px]  text-white">
+            <p className="uppercase text-[50px]">
+              обслужиется / xizmat ko'rsatilmoqda
+            </p>
+          </div>
+          <div className="imgBanner h-[70vh] bg-contain bg-center">
+            <div className="mt-[20px] card-container pl-[15px] ">
+              {list.map((item: any) => (
+                <QueueCard
+                  title="A"
+                  section="MIB"
+                  num={item?.number}
+                  bg="#2EA006"
+                  textBg="#2EA006"
+                />
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
 };
-
 export default Home;
